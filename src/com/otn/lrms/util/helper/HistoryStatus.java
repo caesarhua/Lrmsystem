@@ -7,7 +7,7 @@ public enum HistoryStatus {
     RESERVE("RESERVE", "取消预约", R.drawable.red_btn_selector), CANCEL("CANCEL", "已取消",
             R.drawable.yijiesu), AWAY("AWAY", "暂时离开", R.drawable.yijiesu), CHECK_IN("CHECK_IN",
             "履约中", R.drawable.yijiesu), COMPLETE("COMPLETE", "已履约", R.drawable.yijiesu), INCOMPLETE(
-            "INCOMPLETE", "已履约", R.drawable.yijiesu), MISS("MISS", "失约", R.drawable.yijiesu), STOP(
+            "INCOMPLETE", "早退", R.drawable.yijiesu), MISS("MISS", "失约", R.drawable.yijiesu), STOP(
             "STOP", "已履约", R.drawable.yijiesu);
 
     private String key;
