@@ -1,0 +1,24 @@
+package com.huawei.mbb.net;
+
+import com.huawei.mbb.entity.Result;
+
+public interface DataReqObserver {
+	
+	/**
+	 * response.getRspCode为00才是请求成功，其他情况都做异常抛出，
+	 * 所以无需进行错误代码的判断
+	 * @param cmd
+	 * @param result
+	 */
+	void updateResponseSucess(String cmd,Result result);
+	
+		
+	/**
+	 * 底层已经处理好的Exception的toString为:"server respond error,respcode " + response.getRspCode()
+	 * 不需要在界面进行错误代码的判断
+	 * @param cmd
+	 * @param e
+	 */
+	void updateResponseError(String cmd,Exception e);
+
+}

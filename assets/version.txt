@@ -1,0 +1,12 @@
+{
+    "ios": {
+        "verNo": "",
+        "updates": "",
+        "downURL": ""
+    },
+    "android": {
+        "verNo": "5",
+        "updates": "修复账号密码保存",
+        "downURL": "http://www.leosys.com.cn/app/lib/LRMSystem.apk"
+    }	
+}

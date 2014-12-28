@@ -1,0 +1,153 @@
+package com.huawei.mbb.net;
+
+import java.util.Map;
+
+import android.os.AsyncTask;
+
+import com.huawei.mbb.MbbApplication;
+import com.huawei.mbb.R;
+import com.huawei.mbb.entity.Result;
+import com.huawei.mbb.entity.SubscribeServiceRequest;
+import com.huawei.mbb.entity.UpgradeVersionData;
+import com.huawei.mbb.service.ServiceManager;
+import com.huawei.mbb.service.ServiceManagerFactory;
+import com.huawei.mbb.util.Constants;
+import com.huawei.mbb.util.Logger;
+import com.huawei.mbb.util.MbbException;
+import com.huawei.mbb.util.Util;
+
+public class HttpTask extends AsyncTask<String, Object, Result>
+{
+	private static String TAG = "HttpTask";
+	
+    private boolean flagStopped = false;
+
+    private IHttpTaskCallBack iHttpTaskCallBack1;
+
+    private Exception mbbException = null;
+
+    private Object requestParams;
+
+    private ServiceManager serviceManager;
+
+    public Object getRequestParams()
+    {
+        return requestParams;
+    }
+
+    public void setRequestParams(Object requestParams)
+    {
+        this.requestParams = requestParams;
+    }
+
+    public HttpTask(IHttpTaskCallBack iHttpTaskCallBack)
+    {
+        this.iHttpTaskCallBack1 = iHttpTaskCallBack;
+    }
+
+    @Override
+    protected void onPreExecute()
+    {
+        super.onPreExecute();
+        initService();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    protected Result doInBackground(String... params)
+    {
+    	Logger.getInstance().d(TAG, "HttpTask for " + params[0]);
+        try
+        {
+            if (Constants.QUERY_OFFERS_INSTFORFT.equals(params[0]))
+            {
+                return serviceManager.queryOffersInstForFT();
+            }
+            else if (Constants.QUERY_OFFERS_BYSUBSCRIBINGFORFT.equals(params[0]))
+            {
+                return serviceManager.queryOffersBySubscribingForFT(String
+                        .valueOf(((Map<String, Object>) getRequestParams()).get(Constants.IMSI)));
+            }
+            else if (Constants.SUBSCRIBE_SERVICE.equals(params[0]))
+            {
+                return serviceManager.subscribeService(Util.getIMSI(), String.valueOf(((Map<String, Object>) getRequestParams())
+                        .get(Constants.OFFERID)));
+            }
+            else if ("subscribeServiceTry".equals(params[0]))
+            {
+                return serviceManager.subscribeService(Util.getIMSI(), String.valueOf(((Map<String, Object>) getRequestParams())
+                        .get(Constants.OFFERID)));
+            }
+            else if (Constants.SUBSCRIBER_LOGIN.equals(params[0]))
+            {
+                return serviceManager.subscriberLogin(Util.getIMSI(), String
+                        .valueOf(((Map<String, Object>) getRequestParams()).get(Constants.IPADDRESS)));
+            }
+            else if (Constants.UPDATE_SUBSCRIBE_SERVICE.equals(params[0]))
+            {
+                SubscribeServiceRequest ssr = (SubscribeServiceRequest) requestParams;
+                return serviceManager.updateSubscribeService(Util.getIMSI(), ssr.getOfferId(), ssr.getOfferStatus());
+            }
+            else if (Constants.QUERY_SUBSCRIBER_QUOTA.equals(params[0]))
+            {
+                return serviceManager.querySubscriberQuota(Util.getIMSI());
+            }
+            else if (Constants.UPGRADE_VERSION.equals(params[0]))
+            {
+                // 版本升级，没有统一协议，需另外处理添加报文头
+                UpgradeVersionData up = serviceManager.upgradeVersion(Util.getIMSI(), String
+                        .valueOf(((Map<String, Object>) getRequestParams()).get(Constants.VERSION_CODE)));
+                Result<UpgradeVersionData> result = new Result<UpgradeVersionData>();
+                com.huawei.mbb.entity.ResultOfOperationReply resultOfOperationReply = new com.huawei.mbb.entity.ResultOfOperationReply();
+                result.setResultOfOperationReply(resultOfOperationReply);
+                result.setRespData(up);
+                return result;
+            }else if (Constants.CANCEL_CELL_STATUSEVENT.equals(params[0])) {
+                return serviceManager.cancelCellStatusEvent(Util.getIMSI());
+            }
+            mbbException = new MbbException(MbbApplication.getContext().getResources().getString(R.string.request_operation_error));
+            return null;
+
+        }
+        catch (Exception e)
+        {
+            /// 一旦有异常，都抛出mbbException
+            if (e instanceof MbbException)
+            {
+                mbbException = e;
+            }
+            else
+            {
+                mbbException = new MbbException(e.getMessage());
+            }
+            return null;
+        }
+
+    }
+
+    @Override
+    protected void onPostExecute(Result result)
+    {
+        super.onPostExecute(result);
+        if (iHttpTaskCallBack1 != null && !flagStopped)
+        {
+            iHttpTaskCallBack1.requestReturned(result, mbbException);
+        }
+    }
+
+    @Override
+    protected void onCancelled()
+    {
+        super.onCancelled();
+        flagStopped = true;
+    }
+
+    private void initService()
+    {
+        if (null == serviceManager)
+        {
+            serviceManager = ServiceManagerFactory.createServiceManager("ServiceManagerImpl");
+        }
+    }
+
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 自定义标题栏 -->
+    <style name="CommonActivityTheme" parent="android:Theme">
+        <item name="android:windowTitleStyle">@style/CommonWindowTitle</item>
+        <item name="android:windowTitleBackgroundStyle">@style/CommonTitleBackground</item>
+        <item name="android:windowTitleSize">48dip</item>  
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+</resources>

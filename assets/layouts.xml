@@ -1,0 +1,173 @@
+{
+    "status": "success",
+    "data": {
+        "id": 5,
+        "name": "三层中厅",
+        "cols": 17,
+        "rows": 21,
+        "layout": {
+            "0": {
+                "type": "empty"
+            },
+            "1": {
+                "type": "empty"
+            },
+            "2": {
+                "type": "empty"
+            },
+            "3": {
+                "type": "empty"
+            },
+            "4": {
+                "type": "empty"
+            },
+            "5": {
+                "type": "empty"
+            },
+            "6": {
+                "type": "empty"
+            },
+            "7": {
+                "type": "empty"
+            },
+            "8": {
+                "type": "empty"
+            },
+            "9": {
+                "type": "empty"
+            },
+            "10": {
+                "type": "empty"
+            },
+            "11": {
+                "type": "empty"
+            },
+            "12": {
+                "type": "empty"
+            },
+            "13": {
+                "type": "empty"
+            },
+            "14": {
+                "type": "empty"
+            },
+            "15": {
+                "type": "empty"
+            },
+            "1011": {
+                "id": 1238,
+                "name": "103",
+                "type": "seat",
+                "status": "FREE"
+            },
+            "1012": {
+                "id": 964,
+                "name": "104",
+                "type": "seat",
+                "status": "FREE"
+            },
+            "17015": {
+                "type": "empty"
+            },
+            "17016": {
+                "type": "empty"
+            },
+            "18000": {
+                "type": "empty"
+            },
+            "18001": {
+                "type": "empty"
+            },
+            "18002": {
+                "type": "empty"
+            },
+            "18003": {
+                "type": "empty"
+            },
+            "18004": {
+                "type": "empty"
+            },
+            "18005": {
+                "type": "empty"
+            },
+            "18006": {
+                "type": "empty"
+            },
+            "18007": {
+                "type": "empty"
+            },
+            "18008": {
+                "type": "empty"
+            },
+            "18009": {
+                "type": "empty"
+            },
+            "18010": {
+                "type": "empty"
+            },
+            "18011": {
+                "type": "empty"
+            },
+            "18012": {
+                "type": "empty"
+            },
+            "18013": {
+                "type": "empty"
+            },
+            "18014": {
+                "type": "empty"
+            },
+            "18015": {
+                "type": "empty"
+            },
+            "18016": {
+                "type": "empty"
+            },
+            "19000": {
+                "type": "empty"
+            },
+            "19001": {
+                "type": "empty"
+            },
+            "19002": {
+                "type": "empty"
+            },
+            "19003": {
+                "type": "empty"
+            },
+            "20007": {
+                "type": "empty"
+            },
+            "20008": {
+                "type": "empty"
+            },
+            "20009": {
+                "type": "empty"
+            },
+            "20010": {
+                "type": "empty"
+            },
+            "20011": {
+                "type": "empty"
+            },
+            "20012": {
+                "type": "empty"
+            },
+            "20013": {
+                "name": "å¢å£",
+                "type": "door"
+            },
+            "20014": {
+                "type": "empty"
+            },
+            "20015": {
+                "type": "empty"
+            },
+            "20016": {
+                "type": "empty"
+            }
+        }
+    },
+    "message": "",
+    "code": "0"
+}

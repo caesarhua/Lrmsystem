@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/CCBU_CRM_CODE_SVN/!svn/ver/54210/CRM_CODE/branches/brh_CRM_R003C01L00001_C02_BASE_20120608/module/mobile/client/android/src/com/huawei/mbb/net
+END
+DataEnginer.java
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/svn/CCBU_CRM_CODE_SVN/!svn/ver/53027/CRM_CODE/branches/brh_CRM_R003C01L00001_C02_BASE_20120608/module/mobile/client/android/src/com/huawei/mbb/net/DataEnginer.java
+END
+HttpTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/svn/CCBU_CRM_CODE_SVN/!svn/ver/54210/CRM_CODE/branches/brh_CRM_R003C01L00001_C02_BASE_20120608/module/mobile/client/android/src/com/huawei/mbb/net/HttpTask.java
+END
+IHttpTaskCallBack.java
+K 25
+svn:wc:ra_dav:version-url
+V 170
+/svn/CCBU_CRM_CODE_SVN/!svn/ver/39516/CRM_CODE/branches/brh_CRM_R003C01L00001_C02_BASE_20120608/module/mobile/client/android/src/com/huawei/mbb/net/IHttpTaskCallBack.java
+END
+DataReqObserver.java
+K 25
+svn:wc:ra_dav:version-url
+V 168
+/svn/CCBU_CRM_CODE_SVN/!svn/ver/39754/CRM_CODE/branches/brh_CRM_R003C01L00001_C02_BASE_20120608/module/mobile/client/android/src/com/huawei/mbb/net/DataReqObserver.java
+END

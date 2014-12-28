@@ -1,0 +1,1 @@
+﻿{"msg":"对不起，您的预约权限暂时被取消","reservation":null}

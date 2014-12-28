@@ -1,0 +1,9 @@
+package com.huawei.mbb.net;
+
+import com.huawei.mbb.entity.Result;
+
+public interface IHttpTaskCallBack {
+
+	void requestReturned(Result result,Exception e);
+
+}

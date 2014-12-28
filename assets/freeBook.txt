@@ -1,0 +1,1 @@
+﻿{"msg":null,"reservation":{"id":228,"receipt":"00228-1","onDate":"2013 年 05 月 27 日","begin":"13 : 00","end":"13 : 30","location":"图书馆4层南区研究生自习室南, 座位号1"}}

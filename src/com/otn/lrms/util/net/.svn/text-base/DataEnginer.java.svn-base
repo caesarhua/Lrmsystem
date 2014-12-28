@@ -1,0 +1,102 @@
+
+package com.huawei.mbb.net;
+
+import com.huawei.mbb.MbbApplication;
+import com.huawei.mbb.R;
+import com.huawei.mbb.entity.Result;
+import com.huawei.mbb.util.Constants;
+import com.huawei.mbb.util.Logger;
+import com.huawei.mbb.util.MbbException;
+
+public class DataEnginer implements IHttpTaskCallBack {
+
+    /** 请求接口的命令字 */
+    private String cmd = "";
+
+    /** 接口的入参 */
+    private Object params;
+
+    /** 每次只能请求一个 */
+    private boolean isLoading = false;
+
+    private HttpTask mHttpTask;
+
+    public String getCmd() {
+        return cmd;
+    }
+
+    public Object getParams() {
+        return params;
+    }
+
+    public void setParams(Object params) {
+        this.params = params;
+    }
+
+    public void setCmd(String cmd) {
+        this.cmd = cmd;
+    }
+
+    private DataReqObserver dataReqObserver;
+
+    public DataEnginer(DataReqObserver dataReqObserver) {
+        this.dataReqObserver = dataReqObserver;
+    }
+
+    public void request() {
+        if (isLoading()) {
+            return;
+        }
+        isLoading = true;
+        mHttpTask = new HttpTask(this);
+        mHttpTask.setRequestParams(params);
+        mHttpTask.execute(cmd);
+    }
+
+    public void cancelRequest() {
+        if (null != mHttpTask) {
+            mHttpTask.cancel(true);
+        }
+        setLoading(false);
+    }
+
+    private boolean isLoading() {
+        return this.isLoading;
+    }
+
+    private void setLoading(boolean isLoading) {
+        this.isLoading = isLoading;
+    }
+
+    @Override
+    public void requestReturned(Result result, Exception e) {
+        Exception resultException = null;
+        isLoading = false;
+        if (dataReqObserver == null) {
+            // /无观察者
+            return;
+        }
+        
+        if(e!= null || result == null || result.getResultOfOperationReply() == null){
+            dataReqObserver.updateResponseError(cmd, e);
+        }else {
+            if (cmd.equals(Constants.UPGRADE_VERSION)) {
+                //不属于统一协议：没有包头，只有返回值
+                Logger.getInstance().i(cmd, " ...跟新操作...... ");
+                dataReqObserver.updateResponseSucess(cmd, result);
+            } else {
+                //统一的协议：包头的resultCode为0则请求成功，否则失败。
+                String resultCode = result.getResultOfOperationReply().getResultCode();
+                String resultMessage = result.getResultOfOperationReply().getResultMessage();
+                if (Constants.REQUEST_SUCCESS.equals(resultCode)) {
+                    dataReqObserver.updateResponseSucess(cmd, result);
+                } else {
+                    resultException =  new MbbException(resultMessage);
+                    dataReqObserver.updateResponseError(cmd, resultException);
+                }
+            }
+        }
+
+    }
+
+}
